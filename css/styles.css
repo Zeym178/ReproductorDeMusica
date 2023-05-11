@@ -1,0 +1,26 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+#display-img {
+    width: 80%;
+    height: 25vh;
+    object-fit: scale-down;
+    object-position: center center;
+}
+
+img.mini-display-img {
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit: cover;
+    object-position: center center;
+    padding: 0.1em;
+}
+
+.toast-container {
+    position: fixed;
+    padding: 3px;
+    z-index: 9999;
+}
