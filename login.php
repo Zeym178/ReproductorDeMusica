@@ -22,7 +22,7 @@ if(isset($_SESSION['user_name'])) {
 <body class="d-flex align-items-center bg-dark bg-gradient">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-8 col-sm-12 col-xs-12">
           <div class="card">
             <div class="card-header">
               <h4 class="card-title">Login</h4>
@@ -37,6 +37,7 @@ if(isset($_SESSION['user_name'])) {
                   <label for="password" class="form-label">Contraseña</label>
                   <input type="password" class="form-control" id="password" name="password" required>
                 </div>
+                <div class="g-recaptcha mb-3 text-center" data-sitekey="6LeiGxYmAAAAACUTQ0WkB63VnYjuOVN0b_x6ahdT"></div>
                 <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
               </form>
               <hr>
@@ -46,42 +47,43 @@ if(isset($_SESSION['user_name'])) {
         </div>
       </div>
     </div>
-    
+
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="registerModalLabel">Registro</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registerModalLabel">Registro</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="form-register" method="POST">
+              <div class="mb-3">
+                <label for="registerEmail" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="registerUser" name="registerUser" required>
+              </div>
+              <div class="mb-3">
+                <label for="registerEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="registerEmail" name="registerEmail" required>
+              </div>
+              <div class="mb-3">
+                <label for="registerPassword" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="registerPassword" name="registerPassword" required>
+              </div>
+              <div class="mb-3">
+                <label for="img" class="control-label">Foto de Perfil</label>
+                <input type="file" name="img" id="img" class="form-control" accept="image/*" onchange="previewImage(this, 'dImage1')">
+              </div>
+              <div class="mb-3 text-center">
+                <div class="col-md-6">
+                  <img src="images/music-logo.jpg" alt="Image" class="img-fluid img-thumbnail bg-gradient bg-dark" id="dImage1">
                 </div>
-                <div class="modal-body">
-                    <form id="form-register" method="POST">
-                      <div class="mb-3">
-                        <label for="registerEmail" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="registerUser" name="registerUser" required>
-                      </div>
-                      <div class="mb-3">
-                        <label for="registerEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="registerEmail" name="registerEmail" required>
-                      </div>
-                      <div class="mb-3">
-                        <label for="registerPassword" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="registerPassword" name="registerPassword" required>
-                      </div>
-                      <div class="mb-3">
-                        <label for="img" class="control-label">Foto de Perfil</label>
-                        <input type="file" name="img" id="img" class="form-control" accept="image/*" onchange="previewImage(this, 'dImage1')">
-                      </div>
-                      <div class="mb-3 text-center">
-                        <div class="col-md-6">
-                          <img src="images/music-logo.jpg" alt="Image" class="img-fluid img-thumbnail bg-gradient bg-dark" id="dImage1">
-                        </div>
-                      </div>
-                      <button type="submit" class="btn btn-primary w-100">Registrarse</button>
-                    </form>
-                </div>
-            </div>
+              </div>
+              <div class="g-recaptcha mb-3 text-center" data-sitekey="6LeiGxYmAAAAACUTQ0WkB63VnYjuOVN0b_x6ahdT"></div>
+              <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
 
     <div class="toast-container position-fixed top-0 end-0 p-3"></div>
@@ -92,5 +94,6 @@ if(isset($_SESSION['user_name'])) {
     <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="js/log.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"async defer></script>
 </body>
 </html>

@@ -132,6 +132,7 @@ if(!isset($_SESSION['user_name'])) {
                                     <div class="d-flex">
                                         <h5 class="card-title col-auto flex-grow-1 flex-shrink-1">Lista de Playlists</h5>
                                         <div class="mb-2">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#import_modal"><i class="fa fa-plus"></i> Importar</button>
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#playlist_modal"><i class="fa fa-plus"></i> Añadir</button>
                                         </div>
                                     </div>
@@ -258,6 +259,29 @@ if(!isset($_SESSION['user_name'])) {
             </div>
         </div>
 
+        <div class="modal fade text-dark" id="import_modal" tabindex="-1" aria-labelledby="code_modal_label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="code_modal_label">Importar Playlist</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" id="import-form">
+                            <div class="mb-3">
+                            <label for="encrypted_code" class="form-label">Código:</label>
+                            <input type="text" class="form-control" name="codigo" id="encrypted_code" placeholder="Ingrese el código" required placeholder="">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" form="import-form">Importar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade text-dark" id="update-modal" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content">
@@ -320,6 +344,26 @@ if(!isset($_SESSION['user_name'])) {
 				</div>
 			</div>
 		</div>
+
+        <div class="modal fade text-dark" id="share_modal" tabindex="-1" aria-labelledby="share_modal_label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="share_modal_label">Enlace Para Compartir</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <p id="enlace_encriptado"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="copy_link">Copiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
     <script src="https://kit.fontawesome.com/2493c793bb.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>

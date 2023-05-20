@@ -10,8 +10,8 @@ $playlist = $stmt->fetch(PDO::FETCH_ASSOC);
 $stmt = $db->prepare("DELETE FROM playlist WHERE id = ?");
 $stmt->execute([$id]);
 
-$stmt = $db->prepare("DELETE FROM playlist_det WHERE playlist_id = ?");
-$stmt->execute([$id]);
+/*$stmt = $db->prepare("DELETE FROM playlist_det WHERE playlist_id = ?");
+$stmt->execute([$id]);*/
 
 if ($playlist['urlimg']) {
     $img_path = $playlist['urlimg'];
