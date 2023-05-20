@@ -44,7 +44,7 @@ $(document).ready(function() {
             {
                 targets: -1,
                 data: null,
-                defaultContent: '<button class="btn btn-primary play-button">Play</button> <button class="btn btn-primary edit-button">Editar</button> <button class="btn btn-primary addplaylist-button">ToPlaylist</button> <button class="btn btn-danger delete-button">Eliminar</button>'
+                defaultContent: '<button class="btn btn-primary play-button"><i class="fa-solid fa-play" style="color: #ffffff;"></i></button> <button class="btn btn-primary edit-button"><i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></button> <button class="btn btn-primary addplaylist-button">ToPlaylist</button> <button class="btn btn-danger delete-button"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>'
             }
         ]
     });
@@ -87,7 +87,7 @@ $(document).ready(function() {
             {
                 targets: -1,
                 data: null,
-                defaultContent: '<button class="btn btn-primary play-button">Play All</button> <button class="btn btn-danger delete-button">Eliminar</button>'
+                defaultContent: '<button class="btn btn-primary play-button"><i class="fa-solid fa-play" style="color: #ffffff;"></i></button> <button class="btn btn-danger delete-button"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button> <button class="btn btn-primary share-button"><i class="fa-solid fa-share" style="color: #ffffff;"></i></button>'
             }
         ]
     });
@@ -141,7 +141,7 @@ $(document).ready(function() {
                 {
                     targets: -1,
                     data: null,
-                    defaultContent: '<button class="btn btn-primary play-button">Play</button> <button class="btn btn-danger delete-button">Eliminar</button>'
+                    defaultContent: '<button class="btn btn-primary play-button"><i class="fa-solid fa-play" style="color: #ffffff;"></i></button> <button class="btn btn-danger delete-button"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>'
                 }
             ],
             initComplete: function(settings, json) {
@@ -153,6 +153,53 @@ $(document).ready(function() {
             }
         });
 
+    });
+
+    $('#playlist-table tbody').on('click', '.share-button', function() {
+        var id = $(this).closest('tr').attr('id');
+        $.ajax({
+            type: "POST",
+            url: "encriptar.php",
+            data: { id: id },
+            success: function(response) {
+                var enlaceEncriptado = response;
+                $("#enlace_encriptado").text(enlaceEncriptado);
+                $("#share_modal").modal("show");
+
+                $("#copy_link").click(function() {
+                    navigator.clipboard.writeText(enlaceEncriptado);
+                    showSuccessToast("El enlace ha sido copiado al portapapeles.");
+                });
+            }
+        });
+    });
+
+    $('#import-form').submit(function(event) {
+        event.preventDefault();
+        var form = $(this);
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: "desencriptar.php",
+            method: "POST",
+            data: formData,
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                if (response.success) {
+                    tableplaylist.ajax.reload();
+                    $('#import_modal').modal('hide');
+                    showSuccessToast('La playlist se importo correctamente');
+                    form[0].reset();
+                } else {
+                    showErrorToast(response.message);
+                }
+            },
+            error: function() {
+                showErrorToast('Codigo Invalido');
+            }
+        });
     });
 
     $('#song-table_length').addClass('d-none');

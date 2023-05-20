@@ -18,8 +18,8 @@ $(document).ready(function() {
                     showErrorToast('El email o la contraseña son incorrectos.');
                 }
             },
-            error: function() {
-                showErrorToast('Ha ocurrido un error al procesar su solicitud. Intente nuevamente más tarde.');
+            error: function(xhr) {
+                showErrorToast(xhr.responseJSON.error);
             }
         });
     });
